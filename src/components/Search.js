@@ -28,7 +28,7 @@ class Search extends Component {
                     onChange={this.handleArtistName}
                     onKeyDown={this.keyPresshandler}
                 />
-                <button onClick={this.searchArtist}>Search</button>
+                <button className='search-button' onClick={this.searchArtist}>Search</button>
             </div>
         )
     }

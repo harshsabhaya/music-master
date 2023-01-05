@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PAUSE_ICON from '../assets/pause-icon.svg'
+import PLAY_ICON from '../assets/play-icon.svg'
 
 class Tracks extends Component {
     state = {
@@ -33,25 +35,35 @@ class Tracks extends Component {
         console.log(audio)
     }
     
+    trackIcon = (track) => {
+        if(!track.preview_url) return <span>N/A</span>
+
+        if(this.state.isPlaying && this.state.playingPreviewUrl === track.preview_url) {
+            return <img src={PAUSE_ICON} alt='pause'/>
+        } else {
+            return <img src={PLAY_ICON} alt='play'/>
+        }
+    }
+
     render() {
         const { tracks } = this.props
         return (
-        <div className='row m-4'>
+        <div>
             {tracks.length > 0 && tracks.map(track => {
                 const { id, name, album, preview_url } = track
                 return (
-                    <div key={id} className="col-4" onClick={this.playAudio(preview_url)}>
+                    <div 
+                        key={id} 
+                        onClick={this.playAudio(preview_url)}
+                        className = "track"
+                    >
                         <img 
                             src={album?.images[0]?.url} 
                             alt="track-image" 
-                            style={{
-                                height: 200,
-                                width: 200,
-                                borderRadius: "50%",
-                                objectFit:'cover',
-                            }}
+                            className='track-image'
                         />
-                        <p>{name}</p>
+                        <p className='track-text'>{name}</p>
+                        <p className='track-icon'>{this.trackIcon(track)}</p>
                     </div>
                 )
             })}

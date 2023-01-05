@@ -6,16 +6,16 @@ const Artist = ({ artist }) => {
     const { images, name, followers, genres} = artist
 
     return(
-        <div>
+        <div className="m-5">
             <h3>{name}</h3>
             <p>{followers?.total?.toLocaleString()} Followers</p>
-            <p>{genres.join(",")}</p>
+            <p>{genres.join(", ")}</p>
             <img 
                 src={images[0]?.url} 
                 alt="artist-profile" 
                 style={{
-                    height: 200,
-                    width: 200,
+                    height: 300,
+                    width: 300,
                     borderRadius: "50%",
                     objectFit: "cover"
                 }}
